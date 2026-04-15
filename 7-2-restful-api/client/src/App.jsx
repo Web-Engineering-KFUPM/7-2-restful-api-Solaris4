@@ -1,3 +1,7 @@
+
+import React from "react";
+void React;
+
 /*
 ===================================================================
 Back-end Lab — RESTFul API
@@ -20,7 +24,6 @@ LAB SETUP INSTRUCTIONS
 3. Start the front server server from this path: 7-2-RESTFul-APIs-main\7-2-restful-api\client:
    Run:
       npm run dev
-
 4. Start the back-end server from a separate terminal, path: 7-2-RESTFul-APIs-main\7-2-restful-api\server:
     Run command to install express, cors, mongoose dotenv:
       npm install express cors mongoose dotenv
@@ -180,15 +183,19 @@ LAB SETUP INSTRUCTIONS
       });
  */
 
+void React;
+
 import { useEffect, useMemo, useState } from "react";
+import EditDialog from "./components/EditDialog.jsx";
 import SongForm from "./components/SongForm.jsx";
 import SongTable from "./components/SongTable.jsx";
-import EditDialog from "./components/EditDialog.jsx";
 import {
-  apiGetSongs, apiGetSong,
-  apiCreateSong, apiUpdateSong, apiDeleteSong
+  apiCreateSong,
+  apiDeleteSong,
+  apiGetSong,
+  apiGetSongs,
+  apiUpdateSong
 } from "./lib/api.js";
-import React from "react";
 
 export default function App() {
   const [songs, setSongs] = useState([]);
@@ -216,7 +223,9 @@ export default function App() {
     }
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const onCreate = async (payload) => {
     setCreating(true);
@@ -267,7 +276,10 @@ export default function App() {
     }
   };
 
-  const editingOpen = useMemo(() => Boolean(editingId && editingSong), [editingId, editingSong]);
+  const editingOpen = useMemo(
+    () => Boolean(editingId && editingSong),
+    [editingId, editingSong]
+  );
 
   return (
     <div className="container">
@@ -281,7 +293,9 @@ export default function App() {
             </div>
           </div>
         </div>
-        <div className="badge">API: {import.meta.env.VITE_API_URL || "http://localhost:5174"}</div>
+        <div className="badge">
+          API: {import.meta.env.VITE_API_URL || "http://localhost:5174"}
+        </div>
       </div>
 
       <div className="grid">
@@ -303,7 +317,10 @@ export default function App() {
       <EditDialog
         open={editingOpen}
         song={editingSong}
-        onClose={() => { setEditingId(null); setEditingSong(null); }}
+        onClose={() => {
+          setEditingId(null);
+          setEditingSong(null);
+        }}
         onSave={onSave}
         saving={saving}
       />
